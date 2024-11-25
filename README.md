@@ -1,59 +1,49 @@
-# WeatherApp
+# Costandino - Weather App
+Hello, i created a weather app that uses an api, and a user has a dashboard with a selected city showcasing its weather. A user is also able to go to the prefernces tab and customise their choice. 
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+# Weather App
+This weather app i made is built with Angular v19.
 
-## Development server
+## Setup
+1. Please install dependencies:
+```bash
+npm install
+```
+1.2. Install the chart.js
+```
+npm install chart.js
+```
 
-To start a local development server, run:
+2. then go and get an API Key:
+- I used Open Weather Map so go to [OpenWeatherMap](https://openweathermap.org/api)
+- Copy the API key and put in environments component
 
+3. Add your API key:
+- Create `environment.ts` in `src/environments`
+- Add this code:
+```typescript
+export const environment = {
+  production: false,
+  weatherApiKey: 'the api key',
+  weatherApiUrl: 'https://api.openweathermap.org/data/2.5'
+};
+```
+
+4. Run the app:
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+5. Open `http://localhost:4200` 
 
-## Code scaffolding
+## Features
+- View weather for a city or multiple cities
+- customisable dashboard
+- It can also have temperature and humidity tracking
+- and weather forecast charts
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Built With
+- Angular 19.0.0
+- Angular Material
+- Chart.js
+- OpenWeatherMap API

@@ -1,0 +1,102 @@
+<mat-card class="form-container">
+    <!-- i created steps for each selection -->
+    <mat-stepper [linear]="true" #stepper>
+        <!-- city selection-->
+        <mat-step [stepControl]="preferenceForm.get('cities')!">
+            <form [formGroup]="preferenceForm">
+                <ng-template matStepLabel>Select Cities</ng-template>
+                <mat-form-field class="full-width">
+                    <mat-label>Cities</mat-label>
+                    <input type="text" matInput [matAutocomplete]="auto" [formControl]="cityControl"
+                        placeholder="Search cities...">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onCitySelected($event)">
+                        @for (city of filteredCities | async; track city) {
+                        <mat-option [value]="city">{{city}}</mat-option>
+                        }
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <!--selected city displayed -->
+                <div class="selected-cities" *ngIf="selectedCities.length > 0">
+                    <h4>Selected Cities:</h4>
+                    <div class="city-chips">
+                        @for (city of selectedCities; track city) {
+                        <mat-card class="city-chip">
+                            <span>{{city}}</span>
+                            <button mat-icon-button (click)="removeCity(city)" class="remove-button">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-card>
+                        }
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button mat-button matStepperNext [disabled]="selectedCities.length === 0">Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- here u can choose the metrics -->
+        <mat-step [stepControl]="preferenceForm.get('metrics')!">
+            <form [formGroup]="preferenceForm">
+                <ng-template matStepLabel>Choose Metrics</ng-template>
+                <div class="metrics-grid">
+                    @for (metric of availableMetrics; track metric.value) {
+                    <mat-checkbox [value]="metric.value" (change)="onMetricChange($event, metric.value)">
+                        {{metric.label}}
+                    </mat-checkbox>
+                    }
+                </div>
+                <div class="button-row">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- this displays the optiosn to the user -->
+        <mat-step>
+            <ng-template matStepLabel>Display Options</ng-template>
+            <form [formGroup]="preferenceForm">
+                <div class="display-options">
+                    <div class="option-group">
+                        <h3>Layout</h3>
+                        <mat-radio-group formControlName="layout">
+                            <mat-radio-button value="table">Table View</mat-radio-button>
+                            <mat-radio-button value="card">Card View</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="option-group">
+                        <h3>Chart Type</h3>
+                        <mat-radio-group formControlName="chartType">
+                            <mat-radio-button value="line">Line Chart</mat-radio-button>
+                            <mat-radio-button value="bar">Bar Chart</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="button-row">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!-- and this is to confirm all the selections  -->
+        <mat-step>
+            <ng-template matStepLabel>Confirm</ng-template>
+            <div class="confirmation-summary">
+                <h3>Selected Preferences</h3>
+                <p><strong>Cities:</strong> {{selectedCities.join(', ')}}</p>
+                <p><strong>Metrics:</strong> {{getMetricLabels(preferenceForm.get('metrics')?.value)}}</p>
+                <p><strong>Layout:</strong> {{preferenceForm.get('layout')?.value}}</p>
+                <p><strong>Chart Type:</strong> {{preferenceForm.get('chartType')?.value}}</p>
+            </div>
+            <div class="button-row">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button color="primary" (click)="onSubmit()">Save Preferences</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</mat-card>

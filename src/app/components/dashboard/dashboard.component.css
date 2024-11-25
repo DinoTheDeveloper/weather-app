@@ -1,0 +1,30 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 20px;
+  }
+  .widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .widget {
+    text-align: center;
+  }
+  .metric-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .mat-mdc-table {
+    width: 100%;
+  }
+  .weather-table {
+    margin-top: 2rem;
+  }
