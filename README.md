@@ -1,8 +1,8 @@
 # Costandino - Weather App
-Hello, i created a weather app that uses an api, and a user has a dashboard with a selected city showcasing its weather. A user is also able to go to the prefernces tab and customise their choice. 
+This weather app that i created uses an api from OpenWeatherMap, and a user has a dashboard with a selected city showcasing its weather. A user is also able to go to the prefernces tab and customise their choice. 
 
-# Weather App
-This weather app i made is built with Angular v19.
+# Angular version
+Please note this is built with Angular v19.
 
 ## Setup
 1. Please install dependencies:
